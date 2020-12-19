@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>hii :D</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+
+  </body>
+  <script>
+  setInterval(() => {
+    var t = new Date();
+    var min = t.getMinutes();
+    var s = ""
+    if (min >= 5 && min < 30) {
+      s += "work  " + (29 - min).toString();
+    } else if (min >= 35 && min < 60) {
+      s += "work  " + (59 - min).toString();
+    } else if (min >= 30) {
+      s += "break " + (34 - min).toString();
+    } else {
+      s += "break " + (4 - min).toString();
+    }
+    s += ":" + (60 - t.getSeconds()).toString().padStart(2, "0") + " left";
+    document.title = s;
+  }, 500);
+  </script>
+</html>
