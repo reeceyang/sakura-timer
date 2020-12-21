@@ -4,11 +4,59 @@
     <meta charset="utf-8">
     <title>hii :D</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+      body {
+        font-family: Tahoma, sans-serif;
+        font-style: italic;
+        font-size: 2em;
+        text-decoration: underline;
+        color: #ccc;
+        margin-left: 1em;
+        min-height: 100%;
+      }
+      #toggle-sounds {
+        cursor: pointer;
+      }
+      a {
+        color: inherit;
+      }
+      p:hover {
+        color: lightpink;
+        text-decoration: underline;
+        text-decoration-color: lightpink;
+      }
+      footer {
+        position: fixed;
+        bottom: 0;
+      }
+    </style>
   </head>
   <body>
-
+    <section>
+      <p><a href="https://github.com/reeceyang/structured-pomodoro">structured-pomodoro</a></p>
+      <p id="timer-text">hii :D</p>
+      <p id="toggle-sounds">click me!</p>
+    </section>
+    <footer><p><a href="https://github.com/reeceyang">Made with &lt;3 by Reece.</a></footer>
   </body>
   <script>
+  var playedBefore = false;
+  var soundsOn = null;
+
+  document.getElementById("toggle-sounds").addEventListener("click", () => {
+    if (soundsOn == null) {
+      soundsOn = true;
+    } else {
+      soundsOn = !soundsOn;
+    }
+    if (soundsOn) {
+      document.getElementById("toggle-sounds").innerHTML = "turn sounds off";
+    } else {
+      document.getElementById("toggle-sounds").innerHTML = "turn sounds on";
+    }
+
+  });
+
   setInterval(() => {
     var t = new Date();
     var min = t.getMinutes();
@@ -48,6 +96,20 @@
     }
     s += ":" + ((60 - t.getSeconds()) % 60).toString().padStart(2, "0") + " left";
     document.title = s;
+    document.getElementById("timer-text").innerHTML = s;
+    if (soundsOn) {
+      if ((min == 5 || min == 35) && t.getSeconds() == 0 && !playedBefore) {
+        var audio = new Audio('mixkit-phone-ring-bell-593.wav');
+        audio.play();
+        playedBefore = true;
+      } else if ((min == 0 || min == 30) && t.getSeconds() == 0 && !playedBefore) {
+        var audio = new Audio('mixkit-achievement-bell-600.wav');
+        audio.play();
+        playedBefore = true;
+      } else if (playedBefore) {
+        playedBefore = false;
+      }
+    }
   }, 500);
   </script>
 </html>
