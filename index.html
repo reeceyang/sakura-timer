@@ -35,29 +35,21 @@
   </head>
   <body>
     <section>
-      <p><a href="https://github.com/reeceyang/structured-pomodoro">structured-pomodoro</a></p>
+      <p><a href="https://github.com/reeceyang/sakura-timer">sakura timer</a></p>
       <p id="timer-text">hii :D</p>
-      <p id="toggle-sounds">click me!</p>
+      <p id="toggle-sounds">turn sounds on</p>
     </section>
     <footer><p><a href="https://github.com/reeceyang">made with &lt;3 by reece</a></footer>
   </body>
   <script>
   var playedBefore = false;
-  var soundsOn = null;
+  var soundsOn = false;
   var workStart = new Audio('mixkit-phone-ring-bell-593.wav');
   var breakStart = new Audio('mixkit-achievement-bell-600.wav');
 
   document.getElementById("toggle-sounds").addEventListener("click", () => {
-    if (soundsOn == null) {
-      soundsOn = true;
-    } else {
-      soundsOn = !soundsOn;
-    }
-    if (soundsOn) {
-      document.getElementById("toggle-sounds").innerHTML = "turn sounds off";
-    } else {
-      document.getElementById("toggle-sounds").innerHTML = "turn sounds on";
-    }
+    soundsOn = !soundsOn;
+    document.getElementById("toggle-sounds").innerHTML = "turn sounds " + (soundsOn ? "off" : "on");
   });
 
   setInterval(() => {
